@@ -115,13 +115,7 @@ class Bwh:
             return failed
             
     def reinstallOS(self,osName):
-        getOs = self.getAvailableOS(self)
-        if getOs != 'GetAvailableOS failed,Please try again.':
-            if osName in getOs['templates']:
-                url = 'https://api.64clouds.com/v1/reinstallOS?os='+osName+'&veid='+self.veid+'&api_key='+self.apikey
-            else:
-                failed = json.loads('{"status":"error","name":"'+str(self.reinstallOS.__name__)+'"}')
-                return failed
+        url = 'https://api.64clouds.com/v1/reinstallOS?os='+osName+'&veid='+self.veid+'&api_key='+self.apikey
         try:
             getMsg = rq.get(url)
             getJson = json.loads(getMsg.text.replace("'",'"'))
@@ -190,7 +184,7 @@ class Bwh:
             failed = json.loads('{"status":"error","name":"'+str(self.getSnapshotList.__name__)+'"}')
             return failed
         
-    def snapshotDelete	(self,snapshot):
+    def snapshotDelete(self,snapshot):
         url = 'https://api.64clouds.com/v1/snapshot/delete?snapshot='+snapshot+'&veid='+self.veid+'&api_key='+self.apikey
         try:
             getMsg = rq.get(url)
